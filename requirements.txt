@@ -2,6 +2,5 @@ streamlit
 matplotlib
 pandas
 folium
-streamlit.components.v1
 streamlit_folium
 branca
