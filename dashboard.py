@@ -35,7 +35,7 @@ def get_map_data():
 
 @st.cache
 def get_policy_data():
-    data = pd.read_csv('Policy.csv')
+    data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Policy.csv')
     return data
 
 
