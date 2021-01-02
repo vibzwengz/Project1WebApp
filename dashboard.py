@@ -31,6 +31,18 @@ def get_map_data():
     data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv')
     return data
 
+@st.cache
+def get_policy_data():
+    data = pd.read_csv('Policy.csv')
+    return data
+def make_clickable(link):
+    # target _blank to open new window
+    # extract clickable text to display for your link
+    text = 'Download'
+    return f'<a target="_blank" href="{link}">{text}</a>'
+
+
+
 
 #first function
 def return_html(option):
@@ -174,15 +186,27 @@ table, th, td {
 </html>
 """
     return html
+
+def policy_button():
+    data = get_policy_data()
+    col3, col4 = st.beta_columns(2)
+    for i in range(len(data)):
+        col3.write(data.iloc[i]['Entity'])
+        link = make_clickable(data.iloc[i]['Link'])
+        col4.write(link,unsafe_allow_html=True)
+
+
 #functions end ###############################################################################################################
 
-st.sidebar.subheader("Features of State Specific EV Policy")
-option = st.sidebar.selectbox('Select State Specific Policy', ('--','Central Policy', 'Delhi'))
-if option is not "--":
-    st.subheader("Main features")
+st.sidebar.subheader("Central and State EV Policies")
+if st.sidebar.checkbox('EV Policy List'):
+    policy_button()
+#option = st.sidebar.selectbox('Select State Specific Policy', ('--','Central Policy', 'Delhi'))
+#if option is not "--":
+    #st.subheader("Main features")
 
 
-st.markdown(return_html(option), unsafe_allow_html=True)
+#st.markdown(return_html(option), unsafe_allow_html=True)
 
 col1, col2 = st.beta_columns(2)
 st.sidebar.subheader('Comparision of Present Battery Electric Vehicles sold in the US')
