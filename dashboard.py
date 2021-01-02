@@ -6,6 +6,8 @@ import streamlit.components.v1 as components
 from streamlit_folium import folium_static
 import branca
 import matplotlib.pyplot as plt
+import matplotlib as cm
+import numpy as np
 
 st.title("Dashboard for Project")
 st.sidebar.title("Menu")
@@ -35,6 +37,8 @@ def get_map_data():
 def get_policy_data():
     data = pd.read_csv('Policy.csv')
     return data
+
+
 def make_clickable(link):
     # target _blank to open new window
     # extract clickable text to display for your link
@@ -80,6 +84,34 @@ def chart_return(data,column):
     plt.xlabel(column)
     # st.pyplot(plt)
     return plt
+
+def pie_chart(data,column1,column2):
+    plt.close()
+    list1 = []
+    list2 = []
+    list3 = []
+    total = 0
+    for i in range(len(data)):
+        if pd.notna(data.iloc[i][column2]):
+            total += data.iloc[i][column2]
+    for i in range(len(data)):
+        if pd.notna(data.iloc[i][column2]):
+            list1.append(data.iloc[i][column2]/total * 100)
+            list2.append(data.iloc[i][column1])
+            list3.append(data.iloc[i][column2])
+    labels = ["{}-{:.2f}".format(i,j) for i,j in zip(list2,list1)]
+    fig1, ax1 = plt.subplots()
+    ax1.pie(list3,startangle = 90)
+    theme = plt.get_cmap('tab20')
+    ax1.set_prop_cycle("color", [theme(1. * i / len(list1))
+                                 for i in range(len(list1))])
+    patches,text = ax1.pie(list3,startangle = 90)
+    plt.legend(patches,labels, bbox_to_anchor=(-0.1, 1.),fontsize=8)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    return plt
+
+
+
 
 
 #third function
@@ -245,7 +277,10 @@ if more_info_2:
 st.sidebar.subheader("Lithium Reserves,Resources & Production Details")
 show_map = st.sidebar.checkbox("Show map of lithium reserves and resources")
 show_map_two = st.sidebar.checkbox("Show map of lithium production")
-
+show_pie_chart = st.sidebar.checkbox("Distribution of World Lithium Resources")
+show_pie_chart1 = st.sidebar.checkbox("Distribution of World Lithium Reserves")
+show_pie_chart2 = st.sidebar.checkbox("Distribution of World Lithium Production(2018)")
+show_pie_chart3 = st.sidebar.checkbox("Distribution of World Lithium Production(2019)")
 
 if show_map:
     st.subheader("Lithium Reserves & Resources")
@@ -275,5 +310,26 @@ if show_map_two:
                                    popup=popup, icon=folium.Icon(color='green', icon='info-sign')).add_to(m)
 
     folium_static(m)
+
+if show_pie_chart:
+    data = get_map_data()
+    st.subheader("Distribution of World Lithium Resources")
+    st.pyplot(pie_chart(data,'Country','Resources(Tonnes)'))
+
+
+if show_pie_chart1:
+    data = get_map_data()
+    st.subheader("Distribution of World Lithium Reserves")
+    st.pyplot(pie_chart(data,'Country','Reserve(Tonnes)'))
+
+if show_pie_chart2:
+    data = get_map_data()
+    st.subheader("Distribution of World Lithium Production(2018)")
+    st.pyplot(pie_chart(data,'Country','Production(tonnes)(2018)'))
+
+if show_pie_chart3:
+    data = get_map_data()
+    st.subheader("Distribution of World Lithium Production(2019)")
+    st.pyplot(pie_chart(data,'Country','Production(tonnes)(2019)'))
 
 
