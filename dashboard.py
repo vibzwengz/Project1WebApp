@@ -8,6 +8,7 @@ import branca
 import matplotlib.pyplot as plt
 import matplotlib as cm
 import numpy as np
+import plotly.express as px
 
 st.title("Dashboard for Project")
 st.sidebar.title("Menu")
@@ -109,6 +110,27 @@ def pie_chart(data,column1,column2):
     plt.legend(patches,labels, bbox_to_anchor=(-0.1, 1.),fontsize=8)
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     return plt
+
+def pie_chart1(data,column1,column2):
+    pie_chart = px.pie(
+        data_frame=data,
+        values=column2,
+        names=column1,
+        color= column1,  # differentiate markers (discrete) by color
+        color_discrete_sequence=px.colors.sequential.Blues,  # set marker colors
+        #hover_name=column1,  # values appear in bold in the hover tooltip
+        #labels={"state": "the State"},  # map the labels
+        template='seaborn',#'presentation',  #'ggplot2', 'seaborn', 'simple_white', 'plotly',
+        # 'plotly_white', 'plotly_dark', 'presentation',
+        # 'xgridoff', 'ygridoff', 'gridon', 'none'
+        width=500,  # figure width in pixels
+        height=500,  # figure height in pixels
+        hole=0,  # represents the hole in middle of pie
+
+    )
+    pie_chart.update_traces(textinfo='none')
+    pie_chart.update(layout_showlegend=False)
+    return pie_chart
 
 
 
@@ -314,7 +336,7 @@ if show_map_two:
 if show_pie_chart:
     data = get_map_data()
     st.subheader("Distribution of World Lithium Resources")
-    st.pyplot(pie_chart(data,'Country','Resources(Tonnes)'))
+    st.plotly_chart(pie_chart1(data,'Country','Resources(Tonnes)'))
 
 
 if show_pie_chart1:
