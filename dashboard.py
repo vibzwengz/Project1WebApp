@@ -119,17 +119,17 @@ def pie_chart1(data,column1,column2):
         color= column1,  # differentiate markers (discrete) by color
         color_discrete_sequence=px.colors.sequential.Blues,  # set marker colors
         #hover_name=column1,  # values appear in bold in the hover tooltip
-        #labels={"state": "the State"},  # map the labels
+        #labels={"Resources(Tonnes)": "Resources (Tonnes)"},  # map the labels
         template='seaborn',#'presentation',  #'ggplot2', 'seaborn', 'simple_white', 'plotly',
         # 'plotly_white', 'plotly_dark', 'presentation',
         # 'xgridoff', 'ygridoff', 'gridon', 'none'
         width=500,  # figure width in pixels
         height=500,  # figure height in pixels
         hole=0,  # represents the hole in middle of pie
-
     )
-    pie_chart.update_traces(textinfo='none')
     pie_chart.update(layout_showlegend=False)
+    #pie_chart.update(layout_hovermode="x")
+    pie_chart.update_traces(textinfo = "none",hovertemplate = '%{label} : %{percent}')
     return pie_chart
 
 
@@ -342,16 +342,16 @@ if show_pie_chart:
 if show_pie_chart1:
     data = get_map_data()
     st.subheader("Distribution of World Lithium Reserves")
-    st.pyplot(pie_chart(data,'Country','Reserve(Tonnes)'))
+    st.plotly_chart(pie_chart1(data,'Country','Reserve(Tonnes)'))
 
 if show_pie_chart2:
     data = get_map_data()
     st.subheader("Distribution of World Lithium Production(2018)")
-    st.pyplot(pie_chart(data,'Country','Production(tonnes)(2018)'))
+    st.plotly_chart(pie_chart1(data,'Country','Production(tonnes)(2018)'))
 
 if show_pie_chart3:
     data = get_map_data()
     st.subheader("Distribution of World Lithium Production(2019)")
-    st.pyplot(pie_chart(data,'Country','Production(tonnes)(2019)'))
+    st.plotly_chart(pie_chart1(data,'Country','Production(tonnes)(2019)'))
 
 
