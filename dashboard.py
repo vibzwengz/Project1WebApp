@@ -9,35 +9,41 @@ import matplotlib.pyplot as plt
 import matplotlib as cm
 import numpy as np
 import plotly.express as px
+import time
 
 st.title("Dashboard for Project")
 st.sidebar.title("Menu")
 
 #functions###############################################################################################################
-@st.cache
-def load_data_1():
-    data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Battery.csv")
-    return data
+with st.spinner("Loading...."):
+    @st.cache(show_spinner = False)
+    def load_data_1():
+        data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Battery.csv")
+        return data
 
-@st.cache
-def load_data_2():
-    data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv")
-    return data
+with st.spinner("Loading...."):
+    @st.cache(show_spinner = False)
+    def load_data_2():
+        data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv")
+        return data
 
-@st.cache
-def load_data_3():
-    data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.4.csv")
-    return data
+with st.spinner("Loading...."):
+    @st.cache(show_spinner = False)
+    def load_data_3():
+        data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.4.csv")
+        return data
 
-@st.cache
-def get_map_data():
-    data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv')
-    return data
+with st.spinner("Loading...."):
+    @st.cache(show_spinner = False)
+    def get_map_data():
+        data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv')
+        return data
 
-@st.cache
-def get_policy_data():
-    data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Policy.csv')
-    return data
+with st.spinner("Loading...."):
+    @st.cache(show_spinner = False)
+    def get_policy_data():
+        data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Policy.csv')
+        return data
 
 
 def make_clickable(link):
@@ -86,32 +92,9 @@ def chart_return(data,column):
     # st.pyplot(plt)
     return plt
 
-def pie_chart(data,column1,column2):
-    plt.close()
-    list1 = []
-    list2 = []
-    list3 = []
-    total = 0
-    for i in range(len(data)):
-        if pd.notna(data.iloc[i][column2]):
-            total += data.iloc[i][column2]
-    for i in range(len(data)):
-        if pd.notna(data.iloc[i][column2]):
-            list1.append(data.iloc[i][column2]/total * 100)
-            list2.append(data.iloc[i][column1])
-            list3.append(data.iloc[i][column2])
-    labels = ["{}-{:.2f}".format(i,j) for i,j in zip(list2,list1)]
-    fig1, ax1 = plt.subplots()
-    ax1.pie(list3,startangle = 90)
-    theme = plt.get_cmap('tab20')
-    ax1.set_prop_cycle("color", [theme(1. * i / len(list1))
-                                 for i in range(len(list1))])
-    patches,text = ax1.pie(list3,startangle = 90)
-    plt.legend(patches,labels, bbox_to_anchor=(-0.1, 1.),fontsize=8)
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    return plt
 
-def pie_chart1(data,column1,column2):
+
+def pie_chart1(data,column1,column2,string):
     pie_chart = px.pie(
         data_frame=data,
         values=column2,
@@ -129,7 +112,8 @@ def pie_chart1(data,column1,column2):
     )
     pie_chart.update(layout_showlegend=False)
     #pie_chart.update(layout_hovermode="x")
-    pie_chart.update_traces(textinfo = "none",hovertemplate = '%{label} : %{percent}')
+    string_hover = ' %{label} : %{percent} <br> ' + string + ' : %{value}'
+    pie_chart.update_traces(textinfo = "none",hovertemplate = string_hover)
     return pie_chart
 
 
@@ -336,22 +320,22 @@ if show_map_two:
 if show_pie_chart:
     data = get_map_data()
     st.subheader("Distribution of World Lithium Resources")
-    st.plotly_chart(pie_chart1(data,'Country','Resources(Tonnes)'))
+    st.plotly_chart(pie_chart1(data,'Country','Resources(Tonnes)','Resources (Tonnes)'))
 
 
 if show_pie_chart1:
     data = get_map_data()
     st.subheader("Distribution of World Lithium Reserves")
-    st.plotly_chart(pie_chart1(data,'Country','Reserve(Tonnes)'))
+    st.plotly_chart(pie_chart1(data,'Country','Reserve(Tonnes)','Reserve (Tonnes)'))
 
 if show_pie_chart2:
     data = get_map_data()
     st.subheader("Distribution of World Lithium Production(2018)")
-    st.plotly_chart(pie_chart1(data,'Country','Production(tonnes)(2018)'))
+    st.plotly_chart(pie_chart1(data,'Country','Production(tonnes)(2018)', 'Production (Tonnes) (2018)'))
 
 if show_pie_chart3:
     data = get_map_data()
     st.subheader("Distribution of World Lithium Production(2019)")
-    st.plotly_chart(pie_chart1(data,'Country','Production(tonnes)(2019)'))
+    st.plotly_chart(pie_chart1(data,'Country','Production(tonnes)(2019)', 'Production (Tonnes) (2019)'))
 
 
