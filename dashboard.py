@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 import matplotlib as cm
 import numpy as np
 import plotly.express as px
-import time
 
 st.title("Dashboard for Project")
 st.sidebar.title("Menu")
@@ -85,9 +84,16 @@ def return_html(option):
 
 
 def chart_return(data,column):
+    data = data.sort_values(column)
+    x = list()
+    y = list()
+    for i in range(len(data)):
+        x.append(data.iloc[i]['Manufacturer'] + " " + data.iloc[i]['Model'])
+        y.append(data.iloc[i][column])
     plt.close()
-    plt.barh(data['Model'], data[column])
-    plt.ylabel("Model")
+    #plt.barh(data['Model'], data[column])
+    plt.barh(x,y)
+    plt.ylabel("Make & Model")
     plt.xlabel(column)
     # st.pyplot(plt)
     return plt
@@ -100,7 +106,8 @@ def pie_chart1(data,column1,column2,string):
         values=column2,
         names=column1,
         color= column1,  # differentiate markers (discrete) by color
-        color_discrete_sequence=px.colors.sequential.Blues,  # set marker colors
+        color_discrete_sequence=px.colors.sequential.Rainbow,  # set marker colors
+        #color_discrete_sequence=px.colors.qualitative.Plotly
         #hover_name=column1,  # values appear in bold in the hover tooltip
         #labels={"Resources(Tonnes)": "Resources (Tonnes)"},  # map the labels
         template='seaborn',#'presentation',  #'ggplot2', 'seaborn', 'simple_white', 'plotly',
