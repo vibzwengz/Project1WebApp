@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib as cm
 import numpy as np
 import plotly.express as px
+import json
 
 st.title("Dashboard for Project")
 st.sidebar.title("Menu")
@@ -240,10 +241,53 @@ def policy_button():
         link = make_clickable(data.iloc[i]['Link'])
         col4.write(link,unsafe_allow_html=True)
 
+def policy_map_button():
+    m = folium.Map(tiles="Stamen Watercolor", zoom_start=3, max_zoom=6, min_zoom=2, zoom_Animation=False)
+    states = json.load(open('india_states.geojson', 'r'))
+    style1 = {'fillOpacity': '0', 'color': 'black', 'weight': '0.8'}
+    layer = folium.GeoJson(
+        states,
+        name='geojson',
+        style_function=lambda x: style1
+    ).add_to(m)
+    m.fit_bounds([[26.051054453379013, 64.6016217019466], [27.51097571534207, 100.03322049016737]])
+    folium_static(m)
+
 
 #functions end ###############################################################################################################
 
 st.sidebar.subheader("Central and State EV Policies")
+if st.sidebar.button('Salient Features of Central Policy'):
+    string_central = """
+    <html>
+    <ol>
+    <li>Faster Adoption and Manufacturing of Hybrid and Electric Vehicles (FAME)-1
+     <ul>
+     <li>Initially launched for a two-year period, but extended till September 2018.</li>
+     <li>Approved outlay of INR 795 crores in 2015.
+     <li>Focused on technology development, demand creation, pilot projects and charging infrastructure.</li>
+     </ul>
+     </li>
+    <li>Fame-2
+    <ul>
+    <li>Under phase II extend financial support of INR 8,730 Cr for three years.</li>
+    <li>The fund support includes INR 2,500 Cr for buses, INR 1,000 Cr for four-wheelers, INR 600 Cr for two-wheelers (with maximum speed greater than 25 km) and INR 750 crore for high speed three-wheelers.</li>
+    <li>Main focus on the deployment of electric buses on the Indian roads. Because during FAME-1 Central government received around 47 proposals which demanded deployment of 3,144 buses across 44 cities.</li>
+    <li>With this policy, the central government is planning to prioritise the development of public transportation, shared mobility, and smaller electric vehicles such as two-wheelers.</li>
+    <li>5595 electric buses have been sanctioned to 64 cities and the related STUs. 5095 units out of it are for intra-city transport. Currently, there are approximately 1.95 lakh buses under several STUs in India.</li>
+    <li>There is no fixed timeline mandated by any government (state or central) to complete the transition of state transport union (STU) buses to EVs</li>    
+    </ul>
+    </li>
+    <li>The government, in a recent move, has approved green license plates for electric vehicles in order to encourage people to use them. The purpose behind is their easy identification for proposed benefits such as concessional toll, preferential treatment for parking and free entry in congested zones.</li>
+    <li>The government-backed Energy Efficiency Services Ltd (EESL) has issued tenders for 20K EVs to be deployed across the country for government use. With this the government aims an EV sales penetration of 30% for private cars, 70% for commercial cars, 40% for buses, and 80% for two- and three-wheelers by 2030.</li>
+    </ol>
+    </html>
+    """
+    st.markdown(string_central, unsafe_allow_html=True)
+    if st.button('Hide'):
+        string_central = ""
+if st.sidebar.button('Salient features of State Policies'):
+    policy_map_button()
 if st.sidebar.checkbox('EV Policy List'):
     policy_button()
 #option = st.sidebar.selectbox('Select State Specific Policy', ('--','Central Policy', 'Delhi'))
