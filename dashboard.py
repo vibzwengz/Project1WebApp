@@ -270,6 +270,7 @@ def policy_map_button():
 
 st.sidebar.subheader("Central and State EV Policies")
 if st.sidebar.button('Salient Features of Central Policy'):
+    st.subheader('Salient Features of Central Policy')
     string_central = """
     <html>
     <table>
@@ -308,7 +309,8 @@ if st.sidebar.button('Salient Features of Central Policy'):
     st.write(" ")
     if st.button('Hide'):
         string_central = ""
-if st.sidebar.button('Salient features of State Policies'):
+if st.sidebar.button('Salient Features of State Policies'):
+    st.subheader('Salient Features of State Policies')
     policy_map_button()
 if st.sidebar.checkbox('EV Policy List'):
     policy_button()
