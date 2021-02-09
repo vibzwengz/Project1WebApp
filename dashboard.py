@@ -242,6 +242,7 @@ def policy_button():
         col4.write(link,unsafe_allow_html=True)
 
 def policy_map_button():
+    data = pd.read_csv('StatePolicies.csv')
     m = folium.Map(tiles="Stamen Watercolor", zoom_start=3, max_zoom=6, min_zoom=2, zoom_Animation=False)
     states = json.load(open('india_states.geojson', 'r'))
     style1 = {'fillOpacity': '0', 'color': 'black', 'weight': '0.8'}
@@ -251,6 +252,17 @@ def policy_map_button():
         style_function=lambda x: style1
     ).add_to(m)
     m.fit_bounds([[26.051054453379013, 64.6016217019466], [27.51097571534207, 100.03322049016737]])
+    for i in range(0, len(data)):
+        htmlFile = data.iloc[i]['FileName']
+        html = open(htmlFile, 'r')
+        #st.write(html)
+        html = html.read()
+        #html = """"""
+        iframe = branca.element.IFrame(html=html, width=400, height=300)
+        popup = folium.Popup(iframe, parse_html=True)
+        print(data.iloc[i]['Latitude'])
+        marker = folium.Marker([data.iloc[i]['Latitude'], data.iloc[i]['Longitude']],
+                               popup=popup, icon=folium.Icon(color='green', icon='info-sign')).add_to(m)
     folium_static(m)
 
 
@@ -260,6 +272,14 @@ st.sidebar.subheader("Central and State EV Policies")
 if st.sidebar.button('Salient Features of Central Policy'):
     string_central = """
     <html>
+    <table>
+    <head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    </head>
     <ol>
     <li>Faster Adoption and Manufacturing of Hybrid and Electric Vehicles (FAME)-1
      <ul>
@@ -281,9 +301,11 @@ if st.sidebar.button('Salient Features of Central Policy'):
     <li>The government, in a recent move, has approved green license plates for electric vehicles in order to encourage people to use them. The purpose behind is their easy identification for proposed benefits such as concessional toll, preferential treatment for parking and free entry in congested zones.</li>
     <li>The government-backed Energy Efficiency Services Ltd (EESL) has issued tenders for 20K EVs to be deployed across the country for government use. With this the government aims an EV sales penetration of 30% for private cars, 70% for commercial cars, 40% for buses, and 80% for two- and three-wheelers by 2030.</li>
     </ol>
+    </table>
     </html>
     """
     st.markdown(string_central, unsafe_allow_html=True)
+    st.write(" ")
     if st.button('Hide'):
         string_central = ""
 if st.sidebar.button('Salient features of State Policies'):
