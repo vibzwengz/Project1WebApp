@@ -313,6 +313,7 @@ if st.sidebar.button('Salient Features of State Policies'):
     st.subheader('Salient Features of State Policies')
     policy_map_button()
 if st.sidebar.checkbox('EV Policy List'):
+    st.subheader('EV Policy List')
     policy_button()
 #option = st.sidebar.selectbox('Select State Specific Policy', ('--','Central Policy', 'Delhi'))
 #if option is not "--":
