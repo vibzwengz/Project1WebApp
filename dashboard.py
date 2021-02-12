@@ -18,31 +18,36 @@ st.sidebar.title("Menu")
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def load_data_1():
-        data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Battery.csv")
+        #data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Battery.csv")
+        data = pd.read_csv("Battery.csv")
         return data
 
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def load_data_2():
-        data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv")
+        #data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv")
+        data = pd.read_csv("Table4.16.csv")
         return data
 
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def load_data_3():
-        data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.4.csv")
+        #data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.4.csv")
+        data = pd.read_csv("Table4.4.csv")
         return data
 
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def get_map_data():
-        data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv')
+        #data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv')
+        data = pd.read_csv('Table4.16.csv')
         return data
 
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def get_policy_data():
-        data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Policy.csv')
+        #data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Policy.csv')
+        data = pd.read_csv('Policy.csv')
         return data
 
 
