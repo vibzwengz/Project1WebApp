@@ -287,7 +287,7 @@ if st.sidebar.button('Salient Features of Central Policy'):
         background-position: center;
         background-repeat:no-repeat;
         border: 1px solid black;
-        background-size:cover;
+        background-size:contain;
         }
 }
     </style>
