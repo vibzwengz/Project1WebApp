@@ -18,35 +18,30 @@ st.sidebar.title("Menu")
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def load_data_1():
-        #data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Battery.csv")
         data = pd.read_csv("Battery.csv")
         return data
 
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def load_data_2():
-        #data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv")
         data = pd.read_csv("Table4.16.csv")
         return data
 
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def load_data_3():
-        #data = pd.read_csv("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.4.csv")
         data = pd.read_csv("Table4.4.csv")
         return data
 
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def get_map_data():
-        #data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Table4.16.csv')
         data = pd.read_csv('Table4.16.csv')
         return data
 
 with st.spinner("Loading...."):
     @st.cache(show_spinner = False)
     def get_policy_data():
-        #data = pd.read_csv('https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/Policy.csv')
         data = pd.read_csv('Policy.csv')
         return data
 
@@ -64,7 +59,12 @@ def make_clickable(link):
 def return_html(option):
     html_string = ''
     if option == 'Central Policy':
-        html_string = '<ul>\
+        html_string = '<html>\
+<head>\
+<style>\
+body {background-color: #E6E6FA;}\
+</style>\
+</head><ul>\
               <li>Faster Adoption and Manufacturing of Hybrid and Electric Vehicles(FAME)-1\
                 <ul>\
                   <li>Initially launched for a two-year period, but extended till September 2018 at an aprroved outlay of INR 795 Cr in 2015</li>\
@@ -78,7 +78,7 @@ def return_html(option):
                 INR 600 Cr for two-wheelers and INR 750 Cr for high speed three-wheelers</li>\
                 </ul>\
             </li>\
-            </ul>'
+            </ul></body></html>'
     elif option == "Delhi":
         html_string = '<ul>\
         <li>It envisions the replacement of the existing auto rickshaws and State-run buses with E-Autos and E-Buses respectively\
@@ -276,14 +276,20 @@ def policy_map_button():
 st.sidebar.subheader("Central and State EV Policies")
 if st.sidebar.button('Salient Features of Central Policy'):
     st.subheader('Salient Features of Central Policy')
+
     string_central = """
     <html>
-    <table>
+    <table >
     <head>
     <style>
-        table, th, td {
-            border: 1px solid black;
+        table{
+        background-image: url("https://raw.githubusercontent.com/vibzwengz/Project1WebApp/main/IndiaBackground.jpg");
+        background-position: center;
+        background-repeat:no-repeat;
+        border: 1px solid black;
+        background-size:cover;
         }
+}
     </style>
     </head>
     <ol>
