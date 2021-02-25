@@ -426,3 +426,10 @@ if show_pie_chart3:
     st.plotly_chart(pie_chart1(data,'Country','Production(tonnes)(2019)', 'Production (Tonnes) (2019)'))
 
 
+st.sidebar.subheader("Overall - Information (Country Specific)")
+if st.sidebar.button("World Map"):
+    HtmlFile = open("worldmaptable.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+
