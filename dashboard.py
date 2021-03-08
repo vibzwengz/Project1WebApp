@@ -10,6 +10,7 @@ import matplotlib as cm
 import numpy as np
 import plotly.express as px
 import json
+import webbrowser
 
 st.title("Dashboard for Project")
 st.sidebar.title("Menu")
@@ -287,7 +288,7 @@ if st.sidebar.button('Salient Features of Central Policy'):
         background-position: center;
         background-repeat:no-repeat;
         border: 1px solid black;
-        background-size:contain;
+        background-size:stretch;
         }
 }
     </style>
@@ -433,3 +434,7 @@ if st.sidebar.button("World Map"):
     print(source_code)
     components.html(source_code,height = 600)
 
+st.sidebar.subheader("Miscellaneous Information")
+url = "home.html"
+if st.sidebar.button("Miscellaneous Info - Home"):
+    webbrowser.open_new_tab(url)
