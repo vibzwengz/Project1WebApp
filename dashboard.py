@@ -446,12 +446,12 @@ if st.sidebar.checkbox("Electric Two-Wheelers Models Available in Market"):
     print(source_code)
     components.html(source_code,height = 600)
 if st.sidebar.checkbox("Electric Four-Wheelers Models Available in Market"):
-    HtmlFile = open("bar_graph_1.html.html", 'r', encoding='utf-8')
+    HtmlFile = open("bar_graph_1.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     print(source_code)
     components.html(source_code,height = 600)
 if st.sidebar.checkbox("Statewise No. of EV Charging Stations"):
-    HtmlFile = open("IndiaMapVisualization1.html.html", 'r', encoding='utf-8')
+    HtmlFile = open("World Map Data Visualization.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     print(source_code)
     components.html(source_code,height = 600)
@@ -461,7 +461,7 @@ if st.sidebar.checkbox("Countrywise EV Charging Stations"):
     print(source_code)
     components.html(source_code,height = 600)
 if st.sidebar.checkbox("Battery Comparision 1"):
-    HtmlFile = open("bar_nested_1.html", 'r', encoding='utf-8')
+    HtmlFile = open("bar_nested.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     print(source_code)
     components.html(source_code,height = 600)
@@ -474,13 +474,13 @@ if st.sidebar.checkbox("List of Commercial EV models Available in Market"):
     HtmlFile = open("bar_t1.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     print(source_code)
-    components.html(source_code,height = 600)
+    components.html(source_code,height = 1000)
 if st.sidebar.checkbox("Leading Countries in Vehicle Production"):
     HtmlFile = open("pie.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     print(source_code)
     components.html(source_code,height = 600)
-if st.sidebar.checkbox("Leading Countries in Battery Cell Prodcution"):
+if st.sidebar.checkbox("Leading Countries in Battery Cell Production"):
     HtmlFile = open("pie2.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     print(source_code)
