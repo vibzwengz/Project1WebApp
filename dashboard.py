@@ -435,6 +435,58 @@ if st.sidebar.button("World Map"):
     components.html(source_code,height = 600)
 
 st.sidebar.subheader("Miscellaneous Information")
-url = "home.html"
+url = "bar_nested (3).html"
 if st.sidebar.button("Miscellaneous Info - Home"):
     webbrowser.open_new_tab(url)
+
+st.sidebar.subheader("Miscellaneous Information")
+if st.sidebar.checkbox("Electric Two-Wheelers Models Available in Market"):
+    HtmlFile = open("bar_book3_1.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+if st.sidebar.checkbox("Electric Four-Wheelers Models Available in Market"):
+    HtmlFile = open("bar_graph_1.html.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+if st.sidebar.checkbox("Statewise No. of EV Charging Stations"):
+    HtmlFile = open("IndiaMapVisualization1.html.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+if st.sidebar.checkbox("Countrywise EV Charging Stations"):
+    HtmlFile = open("IndiaMapVisualization1.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+if st.sidebar.checkbox("Battery Comparision 1"):
+    HtmlFile = open("bar_nested_1.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+if st.sidebar.checkbox("Battery Comparision 2"):
+    HtmlFile = open("bar_nested2_1.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+if st.sidebar.checkbox("List of Commercial EV models Available in Market"):
+    HtmlFile = open("bar_t1.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+if st.sidebar.checkbox("Leading Countries in Vehicle Production"):
+    HtmlFile = open("pie.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+if st.sidebar.checkbox("Leading Countries in Battery Cell Prodcution"):
+    HtmlFile = open("pie2.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
+if st.sidebar.checkbox("Leading Countries in Major Sales Market"):
+    HtmlFile = open("pie3.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600)
