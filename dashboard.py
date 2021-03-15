@@ -451,15 +451,15 @@ if st.sidebar.checkbox("Electric Four-Wheelers Models Available in Market"):
     print(source_code)
     components.html(source_code,height = 600)
 if st.sidebar.checkbox("Statewise No. of EV Charging Stations"):
-    HtmlFile = open("World Map Data Visualization.html", 'r', encoding='utf-8')
-    source_code = HtmlFile.read()
-    print(source_code)
-    components.html(source_code,height = 600)
-if st.sidebar.checkbox("Countrywise EV Charging Stations"):
     HtmlFile = open("IndiaMapVisualization1.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read()
     print(source_code)
     components.html(source_code,height = 600)
+if st.sidebar.checkbox("Countrywise EV Charging Stations"):
+    HtmlFile = open("World Map Data Visualization.html", 'r', encoding='utf-8')
+    source_code = HtmlFile.read()
+    print(source_code)
+    components.html(source_code,height = 600,width = 1000)
 if st.sidebar.checkbox("Battery Comparision 1"):
     HtmlFile = open("bar_nested.html", 'r', encoding='utf-8')
     source_code = HtmlFile.read()
